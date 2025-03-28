@@ -24,7 +24,7 @@ class TestIntegers(unittest.TestCase):
         self.assertEqual(token.type, 'INT')
         self.assertNotEqual(token.value, 1934)
         self.assertRaises(lex.LexError, self.lexer.token)
-        
+    
 class TestFloats(unittest.TestCase):
     def setUp(self):
         self.lexer = clite.getLexer()

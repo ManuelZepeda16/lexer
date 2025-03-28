@@ -3,14 +3,18 @@ import ply.lex as lex
 tokens = [ 'INT' , 'FLOAT']
 
 t_ignore  = ' \t'
+digit = r'[0-9]'
+expNotation = r'[eE][-+]?[0-9]+'
 
+floating = fr'{digit}*\.{digit}*'
+@lex.TOKEN(floating)
 def t_FLOAT(t):
-  r'[0-9]*\.[0-9]*'
   t.value = float(t.value)
   return t
-  
+
+integer = fr'{digit}+(_{digit}+)*'
+@lex.TOKEN(integer)
 def t_INT(t):
-  r'[0-9]+(_[0-9]+)*'
   t.value = int(t.value.replace("_", ""))
   return t
 
