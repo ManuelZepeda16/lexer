@@ -19,11 +19,10 @@ def t_INT(t):
   t.value = int(t.value.replace("_", ""))
   return t
 
-string = r'\b[a-zA-Z]+(?: \s[a-zA-Z]+)*'
-
+string = r'"([^"]*)"'
 @lex.TOKEN(string)
 def t_STR(t):
-  t.value = str(t.value)
+  t.value = str(t.value[1:-1])
   return t
 
 def getLexer():
