@@ -1,6 +1,6 @@
 import ply.lex as lex
 
-tokens = [ 'INT' , 'FLOAT']
+tokens = [ 'INT' , 'FLOAT', 'STR']
 
 t_ignore  = ' \t'
 digit = r'([0-9])'
@@ -17,6 +17,13 @@ integer = underscoredDigit
 @lex.TOKEN(integer)
 def t_INT(t):
   t.value = int(t.value.replace("_", ""))
+  return t
+
+string = r'\b[a-zA-Z]+(?: \s[a-zA-Z]+)*'
+
+@lex.TOKEN(string)
+def t_STR(t):
+  t.value = str(t.value)
   return t
 
 def getLexer():
