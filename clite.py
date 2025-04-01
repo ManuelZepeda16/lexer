@@ -19,11 +19,15 @@ def t_INT(t):
   t.value = int(t.value.replace("_", ""))
   return t
 
-string = r'"([^"]*)"'
+string = r'"([^"\\]|\\.)*"'
 @lex.TOKEN(string)
 def t_STR(t):
-  t.value = str(t.value[1:-1])
-  return t
+    if '\\' in t.value:
+        t.value = str(t.value)
+        return t
+    else:
+        t.value = str(t.value[1:-1])
+        return t
 
 def getLexer():
   return lex.lex()
